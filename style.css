@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 20px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: clamp(200px, 50%, 400px);
+  border: 1px solid black;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+#display {
+  width: 100%;
+  min-height: 8ch;
+  border: 1px solid grey;
+  padding: 0.5rem;
+}
+
+.action,
+.number {
+  width: 2rem;
+  height: 2rem;
+}
