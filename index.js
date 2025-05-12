@@ -60,7 +60,12 @@ clearDisplayBtn.addEventListener("click", () => {
 
 operands.forEach((operand) => {
   operand.addEventListener("click", (e) => {
-    display.textContent += e.target.textContent;
+    const operandAtTheEnd = RegExp(/[\+\-\*\/]$/);
+    if (display.textContent.match(operandAtTheEnd)) {
+      display.textContent = display.textContent.slice(0, -1) + e.target.textContent;
+    } else {
+      display.textContent += e.target.textContent;
+    }
     isAnswerShown = false;
   });
 });
