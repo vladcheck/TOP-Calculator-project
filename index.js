@@ -30,7 +30,13 @@ function operate(expr) {
 }
 
 const display = document.getElementById("display");
+const deleteSymbol = document.getElementById("delete-symbol");
 const numbersSection = document.querySelector(".numbers");
+
+deleteSymbol.addEventListener("click", () => {
+  display.textContent = display.textContent.slice(0, -1);
+});
+
 numbersSection.addEventListener("click", (e) => {
   e.stopPropagation();
   if (e.target.tagName === "BUTTON") {
