@@ -60,6 +60,7 @@ clearDisplayBtn.addEventListener("click", () => {
 operands.forEach((operand) => {
   operand.addEventListener("click", (e) => {
     display.textContent += e.target.textContent;
+    isAnswerShown = false;
   });
 });
 
