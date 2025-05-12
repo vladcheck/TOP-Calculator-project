@@ -28,3 +28,12 @@ function operate(expr) {
       throw Error("Undefined operator");
   }
 }
+
+const display = document.getElementById("display");
+const numbersSection = document.querySelector(".numbers");
+numbersSection.addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (e.target.tagName === "BUTTON") {
+    display.textContent += e.target.textContent;
+  }
+});
