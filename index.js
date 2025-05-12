@@ -39,6 +39,7 @@ const display = document.getElementById("display");
 const deleteSymbolBtn = document.getElementById("delete-symbol");
 const clearDisplayBtn = document.getElementById("clear");
 const numbersSection = document.querySelector(".numbers");
+const operands = document.querySelectorAll(".operand");
 const equalsBtn = document.getElementById("equals");
 
 deleteSymbolBtn.addEventListener("click", () => {
@@ -47,6 +48,12 @@ deleteSymbolBtn.addEventListener("click", () => {
 
 clearDisplayBtn.addEventListener("click", () => {
   display.textContent = "";
+});
+
+operands.forEach((operand) => {
+  operand.addEventListener("click", (e) => {
+    display.textContent += e.target.textContent;
+  });
 });
 
 numbersSection.addEventListener("click", (e) => {
