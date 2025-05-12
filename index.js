@@ -1,5 +1,5 @@
 function Expression(x, y, operator) {
-  return { x, y, operator };
+  return { x: Number(x), y: Number(y), operator };
 }
 
 // expr = expression
@@ -27,6 +27,12 @@ function operate(expr) {
     default:
       throw Error("Undefined operator");
   }
+}
+
+function parse(displayContent) {
+  const pattern = RegExp(/(\d+)([\+\-\/\*])(\d+)/);
+  const [text, x, operator, y] = pattern.exec(displayContent);
+  return Expression(x, y, operator);
 }
 
 const display = document.getElementById("display");
