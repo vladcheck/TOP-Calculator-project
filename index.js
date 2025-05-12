@@ -32,8 +32,9 @@ function operate(expr) {
 }
 
 function parse(displayContent) {
-  const pattern = RegExp(/(\d+\.?\d?)([\+\-\/\*])(\d+\.?\d?)/);
+  const pattern = RegExp(/(\d+\.?\d*)([\+\-\/\*])(\d+\.?\d*)/);
   const parsingResult = pattern.exec(displayContent);
+  console.log(parsingResult);
   if (!parsingResult) {
     throw Error("Invalid expression");
   } else {
