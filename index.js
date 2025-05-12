@@ -30,11 +30,16 @@ function operate(expr) {
 }
 
 const display = document.getElementById("display");
-const deleteSymbol = document.getElementById("delete-symbol");
+const deleteSymbolBtn = document.getElementById("delete-symbol");
+const clearDisplayBtn = document.getElementById("clear");
 const numbersSection = document.querySelector(".numbers");
 
-deleteSymbol.addEventListener("click", () => {
+deleteSymbolBtn.addEventListener("click", () => {
   display.textContent = display.textContent.slice(0, -1);
+});
+
+clearDisplayBtn.addEventListener("click", () => {
+  display.textContent = "";
 });
 
 numbersSection.addEventListener("click", (e) => {
