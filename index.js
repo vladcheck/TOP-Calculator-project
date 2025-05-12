@@ -39,6 +39,7 @@ const display = document.getElementById("display");
 const deleteSymbolBtn = document.getElementById("delete-symbol");
 const clearDisplayBtn = document.getElementById("clear");
 const numbersSection = document.querySelector(".numbers");
+const equalsBtn = document.getElementById("equals");
 
 deleteSymbolBtn.addEventListener("click", () => {
   display.textContent = display.textContent.slice(0, -1);
@@ -53,4 +54,10 @@ numbersSection.addEventListener("click", (e) => {
   if (e.target.tagName === "BUTTON") {
     display.textContent += e.target.textContent;
   }
+});
+
+equalsBtn.addEventListener("click", () => {
+  const expression = parse(display.textContent);
+  const answer = operate(expression);
+  display.textContent = answer;
 });
