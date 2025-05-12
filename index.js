@@ -1,3 +1,7 @@
+function Expression(x, y, operator) {
+  return { x, y, operator };
+}
+
 // expr = expression
 function operate(expr) {
   const Calculate = (() => {
