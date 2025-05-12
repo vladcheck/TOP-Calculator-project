@@ -1,3 +1,5 @@
+let isAnswerShown = false;
+
 function Expression(x, y, operator) {
   return { x: Number(x), y: Number(y), operator };
 }
@@ -64,7 +66,12 @@ operands.forEach((operand) => {
 numbersSection.addEventListener("click", (e) => {
   e.stopPropagation();
   if (e.target.tagName === "BUTTON") {
-    display.textContent += e.target.textContent;
+    if (isAnswerShown) {
+      display.textContent = e.target.textContent;
+      isAnswerShown = false;
+    } else {
+      display.textContent += e.target.textContent;
+    }
   }
 });
 
@@ -72,4 +79,5 @@ equalsBtn.addEventListener("click", () => {
   const expression = parse(display.textContent);
   const answer = operate(expression);
   display.textContent = answer;
+  isAnswerShown = true;
 });
