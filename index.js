@@ -1,7 +1,7 @@
 let isAnswerShown = false;
 
 function Expression(x, y, operator) {
-  return { x: Number(x), y: Number(y), operator };
+  return { x: parseFloat(x), y: parseFloat(y), operator };
 }
 
 // expr = expression
@@ -32,7 +32,7 @@ function operate(expr) {
 }
 
 function parse(displayContent) {
-  const pattern = RegExp(/(\d+)([\+\-\/\*])(\d+)/);
+  const pattern = RegExp(/(\d+\.?\d?)([\+\-\/\*])(\d+\.?\d?)/);
   const parsingResult = pattern.exec(displayContent);
   if (!parsingResult) {
     throw Error("Invalid expression");
