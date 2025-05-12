@@ -10,7 +10,7 @@ function operate(expr) {
     const multiply = (x, y) => x * y;
     const divide = (x, y) => {
       if (y === 0) throw Error("Division by zero");
-      return x / y;
+      return ((x + 0.0) / y).toFixed(5);
     };
     return { add, subtract, multiply, divide };
   })();
