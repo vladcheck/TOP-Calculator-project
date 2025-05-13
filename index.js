@@ -109,7 +109,7 @@ document.addEventListener("keydown", (e) => {
     evaluateExpression();
   } else if (key === "Backspace") {
     removeLastCharacter();
-  } else if ("0123456789".includes(key)) {
+  } else if ("0123456789.".includes(key)) {
     putNumber(key);
   } else if ("+-/*".includes(key)) {
     putOperand(key);
