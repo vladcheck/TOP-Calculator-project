@@ -7,6 +7,15 @@ const numbersSection = document.querySelector(".numbers");
 const operands = document.querySelectorAll(".operand");
 const equalsBtn = document.getElementById("equals");
 
+function putNumber(numberStr) {
+  if (isAnswerShown) {
+    display.textContent = numberStr;
+    isAnswerShown = false;
+  } else {
+    display.textContent += numberStr;
+  }
+}
+
 function Expression(x, y, operator) {
   return { x: parseFloat(x), y: parseFloat(y), operator };
 }
@@ -75,12 +84,7 @@ operands.forEach((operand) => {
 numbersSection.addEventListener("click", (e) => {
   e.stopPropagation();
   if (e.target.tagName === "BUTTON") {
-    if (isAnswerShown) {
-      display.textContent = e.target.textContent;
-      isAnswerShown = false;
-    } else {
-      display.textContent += e.target.textContent;
-    }
+    putNumber(e.target.textContent);
   }
 });
 
@@ -97,7 +101,7 @@ document.addEventListener("keydown", (e) => {
   if (key === "Backspace") {
     removeLastCharacter();
   } else if ("0123456789".includes(key)) {
-    display.textContent += key;
+    putNumber(key);
   } else if ("+-/*".includes(key)) {
     display.textContent += key;
   }
