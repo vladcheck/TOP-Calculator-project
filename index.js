@@ -1,7 +1,18 @@
 let isAnswerShown = false;
 
+const display = document.getElementById("display");
+const deleteSymbolBtn = document.getElementById("delete-symbol");
+const clearDisplayBtn = document.getElementById("clear");
+const numbersSection = document.querySelector(".numbers");
+const operands = document.querySelectorAll(".operand");
+const equalsBtn = document.getElementById("equals");
+
 function Expression(x, y, operator) {
   return { x: parseFloat(x), y: parseFloat(y), operator };
+}
+
+function removeLastCharacter() {
+  display.textContent = display.textContent.slice(0, -1);
 }
 
 // expr = expression
@@ -43,16 +54,7 @@ function parse(displayContent) {
   }
 }
 
-const display = document.getElementById("display");
-const deleteSymbolBtn = document.getElementById("delete-symbol");
-const clearDisplayBtn = document.getElementById("clear");
-const numbersSection = document.querySelector(".numbers");
-const operands = document.querySelectorAll(".operand");
-const equalsBtn = document.getElementById("equals");
-
-deleteSymbolBtn.addEventListener("click", () => {
-  display.textContent = display.textContent.slice(0, -1);
-});
+deleteSymbolBtn.addEventListener("click", removeLastCharacter);
 
 clearDisplayBtn.addEventListener("click", () => {
   display.textContent = "";
@@ -91,7 +93,10 @@ equalsBtn.addEventListener("click", () => {
 
 document.addEventListener("keydown", (e) => {
   const key = e.key;
-  if ("0123456789".includes(key)) {
+  console.log(key);
+  if (key === "Backspace") {
+    removeLastCharacter();
+  } else if ("0123456789".includes(key)) {
     display.textContent += key;
   } else if ("+-/*".includes(key)) {
     display.textContent += key;
