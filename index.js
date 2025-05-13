@@ -88,3 +88,12 @@ equalsBtn.addEventListener("click", () => {
   display.textContent = answer;
   isAnswerShown = true;
 });
+
+document.addEventListener("keydown", (e) => {
+  const key = e.key;
+  if ("0123456789".includes(key)) {
+    display.textContent += key;
+  } else if ("+-/*".includes(key)) {
+    display.textContent += key;
+  }
+});
