@@ -7,6 +7,13 @@ const numbersSection = document.querySelector(".numbers");
 const operands = document.querySelectorAll(".operand");
 const equalsBtn = document.getElementById("equals");
 
+function evaluateExpression() {
+  const expression = parse(display.textContent);
+  const answer = operate(expression);
+  display.textContent = answer;
+  isAnswerShown = true;
+}
+
 function putNumber(numberStr) {
   if (isAnswerShown) {
     display.textContent = numberStr;
@@ -93,17 +100,14 @@ numbersSection.addEventListener("click", (e) => {
   }
 });
 
-equalsBtn.addEventListener("click", () => {
-  const expression = parse(display.textContent);
-  const answer = operate(expression);
-  display.textContent = answer;
-  isAnswerShown = true;
-});
+equalsBtn.addEventListener("click", evaluateExpression);
 
 document.addEventListener("keydown", (e) => {
   const key = e.key;
   console.log(key);
-  if (key === "Backspace") {
+  if (key === "Enter" || key === "=") {
+    evaluateExpression();
+  } else if (key === "Backspace") {
     removeLastCharacter();
   } else if ("0123456789".includes(key)) {
     putNumber(key);
