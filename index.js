@@ -1,3 +1,7 @@
+const OPERANDS_STRING = "^*/+-";
+const expressionPattern = RegExp(/(\-?\d+\.?\d*)([\^\+\-\/\*])(\d+\.?\d*)/);
+const operandAtTheEndPattern = RegExp(/[\^\+\-\*\/]$/);
+
 let isAnswerShown = false;
 
 const display = document.getElementById("display");
@@ -24,8 +28,7 @@ function putNumber(numberStr) {
 }
 
 function putOperand(operandChar) {
-  const operandAtTheEnd = RegExp(/[\+\-\*\/]$/);
-  if (display.textContent.match(operandAtTheEnd)) {
+  if (display.textContent.match(operandAtTheEndPattern)) {
     display.textContent = display.textContent.slice(0, -1) + operandChar;
   } else {
     display.textContent += operandChar;
@@ -55,7 +58,8 @@ function operate(expr) {
       if (y === 0) throw Error("Division by zero");
       return ((x + 0.0) / y).toFixed(5);
     };
-    return { add, subtract, multiply, divide };
+    const pow = (x, y) => Math.pow(x, y);
+    return { add, subtract, multiply, divide, pow };
   })();
 
   switch (expr.operator) {
@@ -67,14 +71,15 @@ function operate(expr) {
       return Calculate.multiply(expr.x, expr.y);
     case "/":
       return Calculate.divide(expr.x, expr.y);
+    case "^":
+      return Calculate.pow(expr.x, expr.y);
     default:
       throw Error("Undefined operator");
   }
 }
 
 function parse(displayContent) {
-  const pattern = RegExp(/(\-?\d+\.?\d*)([\+\-\/\*])(\d+\.?\d*)/);
-  const parsingResult = pattern.exec(displayContent);
+  const parsingResult = expressionPattern.exec(displayContent);
   console.log(parsingResult);
   if (!parsingResult) {
     throw Error("Invalid expression");
@@ -111,7 +116,7 @@ document.addEventListener("keydown", (e) => {
     removeLastCharacter();
   } else if ("0123456789.".includes(key)) {
     putNumber(key);
-  } else if ("+-/*".includes(key)) {
+  } else if (OPERANDS_STRING.includes(key)) {
     putOperand(key);
   }
 });
