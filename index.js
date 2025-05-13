@@ -24,6 +24,10 @@ function removeLastCharacter() {
   display.textContent = display.textContent.slice(0, -1);
 }
 
+function clearDisplay() {
+  display.textContent = "";
+}
+
 // expr = expression
 function operate(expr) {
   const Calculate = (() => {
@@ -65,9 +69,7 @@ function parse(displayContent) {
 
 deleteSymbolBtn.addEventListener("click", removeLastCharacter);
 
-clearDisplayBtn.addEventListener("click", () => {
-  display.textContent = "";
-});
+clearDisplayBtn.addEventListener("click", clearDisplay);
 
 operands.forEach((operand) => {
   operand.addEventListener("click", (e) => {
