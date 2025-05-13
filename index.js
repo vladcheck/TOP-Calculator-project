@@ -16,6 +16,16 @@ function putNumber(numberStr) {
   }
 }
 
+function putOperand(operandChar) {
+  const operandAtTheEnd = RegExp(/[\+\-\*\/]$/);
+  if (display.textContent.match(operandAtTheEnd)) {
+    display.textContent = display.textContent.slice(0, -1) + operandChar;
+  } else {
+    display.textContent += operandChar;
+  }
+  isAnswerShown = false;
+}
+
 function Expression(x, y, operator) {
   return { x: parseFloat(x), y: parseFloat(y), operator };
 }
@@ -68,18 +78,11 @@ function parse(displayContent) {
 }
 
 deleteSymbolBtn.addEventListener("click", removeLastCharacter);
-
 clearDisplayBtn.addEventListener("click", clearDisplay);
 
 operands.forEach((operand) => {
   operand.addEventListener("click", (e) => {
-    const operandAtTheEnd = RegExp(/[\+\-\*\/]$/);
-    if (display.textContent.match(operandAtTheEnd)) {
-      display.textContent = display.textContent.slice(0, -1) + e.target.textContent;
-    } else {
-      display.textContent += e.target.textContent;
-    }
-    isAnswerShown = false;
+    putOperand(e.target.textContent);
   });
 });
 
@@ -105,6 +108,6 @@ document.addEventListener("keydown", (e) => {
   } else if ("0123456789".includes(key)) {
     putNumber(key);
   } else if ("+-/*".includes(key)) {
-    display.textContent += key;
+    putOperand(key);
   }
 });
